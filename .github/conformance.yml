@@ -1,0 +1,118 @@
+# Conformance record for the trsdn Repository Quality Standard.
+#
+# Evidence and per-criterion notes: docs/self-assessment.md
+# Public and actively developed, so the Archived profile is not applicable.
+
+standard_version: "1.3.3"
+assessed_on: 2026-08-28
+state: Needs work
+evidence: "docs/self-assessment.md"
+
+criteria:
+  # Baseline
+  B01: pass
+  B02: pass
+  B03: pass
+  B04: pass
+  B05: pass
+  B06: pass
+  B07: pass
+  B08: pass
+  B09: pass
+  B10: pass
+  B11: pass
+  B12: pass
+
+  # Public Repositories
+  P01: pass
+  P02: pass
+  P03: pass
+  P04: pass
+  P05: pass
+  P06: pass
+  P07: pass
+  P08: pass
+  P09: partial
+
+  # Software Repositories
+  S01: pass
+  S02: pass
+  S03: partial
+  S04: pass
+  S05: pass
+  S06: na
+  S07: pass
+  S08: pass
+  S09: pass
+  S10: pass
+
+  # Deployable Repositories
+  D01: pass
+  D02: na
+  D03: pass
+  D04: na
+  D05: pass
+  D06: na
+
+  # Package And Release Repositories
+  R01: pass
+  R02: pass
+  R03: pass
+  R04: pass
+  R05: pass
+  R06: pass
+
+  # Product Identity
+  I01: pass
+  I02: pass
+  I03: pass
+  I04: pass
+  I05: pass
+  I06: pass
+
+  # Documentation Repositories
+  T01: na
+  T02: na
+  T03: na
+  T04: na
+  T05: na
+
+  # Agent Readiness
+  G01: pass
+  G02: pass
+  G03: pass
+  G04: pass
+  G05: pass
+  G06: pass
+  G07: pass
+  G08: partial
+
+  # Language And Localization
+  L01: pass
+  L02: pass
+  L03: pass
+  L04: na
+  L05: na
+  L06: na
+  L07: pass
+
+  # Accessibility
+  X01: na
+  X02: na
+  X03: partial
+  X04: na
+  X05: na
+
+  # Data Protection And Privacy
+  Y01: pass
+  Y02: pass
+  Y03: na
+  Y04: na
+  Y05: pass
+  Y06: na
+
+  # Archived Repositories
+  A01: na
+  A02: na
+  A03: na
+  A04: na
