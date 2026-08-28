@@ -15,6 +15,11 @@ icon view: you get thumbnails.
 It reads files. It does not edit them, slice them, talk to printers, reach the network, or collect
 anything.
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".github/stats/repo-card-dark.svg">
+  <img alt="Repository activity for trsdn/threemf-quicklook" src=".github/stats/repo-card.svg" width="480">
+</picture>
+
 ## Installing
 
 Download the latest DMG from [Releases](https://github.com/trsdn/threemf-quicklook/releases/latest),

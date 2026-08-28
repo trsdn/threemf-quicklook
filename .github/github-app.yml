@@ -1,0 +1,41 @@
+# Repository configuration for the GitHub Copilot app.
+#
+# G08: this exists so the behaviour is a decision rather than an inherited default.
+
+instructions: |
+  This is a macOS host app plus two Quick Look extensions. Most of the interesting logic is NOT
+  here: reading a .3mf and choosing which embedded image is the preview lives in
+  trsdn/ThreeMFKit. A change about which image is picked, or about a malformed package, belongs
+  there.
+
+  ThreeMFKit is pinned by exact version because this bundle is notarized and its inputs must be
+  reproducible. Do not loosen it to `from:`.
+
+  ThreeMFQuickLook.xcodeproj is generated from project.yml by XcodeGen and is also committed.
+  Regenerate and commit it in the same change, or CI fails on a stale project.
+
+  Do not use `qlmanage -t` to check whether a preview works. It hangs forever against modern Quick
+  Look extensions -- it launches the extension and never sends it a request. Use
+  `swift scripts/verify-quicklook.swift <file.3mf>`, which goes through QLThumbnailGenerator like
+  Finder does.
+
+  Never install an ad-hoc signed build over the notarized one to test. macOS will not register
+  Quick Look extensions from it, and recovering the registration afterwards needs a logout.
+
+scripts:
+  - name: Build and test
+    command: xcodegen generate && xcodebuild -project ThreeMFQuickLook.xcodeproj -scheme ThreeMFQuickLook -destination 'platform=macOS' CODE_SIGNING_ALLOWED=NO test
+
+  - name: Check bundle is notarization-ready
+    command: ./scripts/check-bundle.sh
+
+  - name: Check badges and plist versions
+    command: ./scripts/badges.py --check && ./scripts/check_plist_versions.py
+
+# The deliverable is an application bundle; there is no dev server to open.
+auto_open_in_browser: false
+
+automation:
+  auto_issue_session: true
+  # Off deliberately: this repository holds a signing and release path.
+  remote_control: false

@@ -40,7 +40,11 @@ jobs:
           xcode-version: latest-stable
 
       - name: Install tools
-        run: brew install xcodegen
+        run: brew install xcodegen swiftlint
+
+      - name: Lint
+        # Thresholds are set so the tree is error-free; remaining warnings are long log lines.
+        run: swiftlint lint --reporter github-actions-logging
 
       - name: Generate project
         run: |
@@ -49,12 +53,26 @@ jobs:
           # local build disagree about what is being built.
           git diff --exit-code -- ThreeMFQuickLook.xcodeproj
 
-      - name: Build
+      - name: Test
         run: |
           xcodebuild -project ThreeMFQuickLook.xcodeproj \
                      -scheme ThreeMFQuickLook \
                      -destination 'platform=macOS' \
-                     CODE_SIGNING_ALLOWED=NO build
+                     -derivedDataPath .build/test \
+                     CODE_SIGNING_ALLOWED=NO test
+
+      # A test build embeds the XCTest frameworks into the host app -- versioned bundles full of
+      # symlinks, which the notarization broker rejects. That is normal for a test build and says
+      # nothing about what ships, so the bundle check runs against a clean Release build, which is
+      # what the broker actually builds.
+      - name: Build what ships
+        run: |
+          xcodebuild -project ThreeMFQuickLook.xcodeproj \
+                     -scheme ThreeMFQuickLook \
+                     -configuration Release \
+                     -destination 'platform=macOS' \
+                     -derivedDataPath .build/release \
+                     CODE_SIGNING_ALLOWED=NO clean build
 
       - name: Check bundle is notarization-ready
-        run: ./scripts/check-bundle.sh
+        run: ./scripts/check-bundle.sh .build/release/Build/Products/Release/ThreeMFQuickLook.app

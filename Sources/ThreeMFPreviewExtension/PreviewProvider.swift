@@ -23,8 +23,25 @@ final class PreviewProvider: QLPreviewProvider, QLPreviewingController {
         case .preview(let image):
         logger.info("Preview extracted file=\(request.fileURL.lastPathComponent, privacy: .private) bytes=\(image.data.count) width=\(image.pixelSize.width) height=\(image.pixelSize.height)")
             let contentType = UTType(image.contentTypeIdentifier) ?? .png
-            return QLPreviewReply(dataOfContentType: contentType, contentSize: image.pixelSize) { _ in
-                image.data
+            let fileName = request.fileURL.lastPathComponent
+
+            // Returning the image bytes directly is simpler, but then the preview is a bare image
+            // with nothing for VoiceOver to announce -- the whole content of the preview is
+            // non-text with no text alternative. Wrapping it in HTML and attaching the image by
+            // cid: lets it carry a real alt description, at no cost to how it looks: the image
+            // still fills the view and is still the same bytes.
+            return QLPreviewReply(dataOfContentType: .html, contentSize: image.pixelSize) { reply in
+                reply.stringEncoding = .utf8
+                reply.attachments = [
+                    PreviewMarkup.attachmentIdentifier: QLPreviewReplyAttachment(
+                        data: image.data,
+                        contentType: contentType
+                    )
+                ]
+                reply.title = fileName
+                return Data(
+                    PreviewMarkup.image(fileName: fileName, pixelSize: image.pixelSize).utf8
+                )
             }
 
         case .fallback(let fallback):
@@ -39,7 +56,12 @@ final class PreviewProvider: QLPreviewProvider, QLPreviewingController {
         logger.error("Preview extraction fell back file=\(request.fileURL.path, privacy: .private)")
             return QLPreviewReply(dataOfContentType: .html, contentSize: CGSize(width: 640, height: 420)) { reply in
                 reply.stringEncoding = .utf8
-                return Self.fallbackHTML(for: fallback)
+                return Data(
+                    PreviewMarkup.fallback(
+                        fileName: fallback.fileName,
+                        message: Self.fallbackMessage(for: fallback.reason)
+                    ).utf8
+                )
             }
         }
     }
@@ -57,63 +79,4 @@ final class PreviewProvider: QLPreviewProvider, QLPreviewingController {
         }
     }
 
-    private static func fallbackHTML(for fallback: PreviewFallback) -> Data {
-        let escapedFileName = fallback.fileName
-            .replacingOccurrences(of: "&", with: "&amp;")
-            .replacingOccurrences(of: "<", with: "&lt;")
-            .replacingOccurrences(of: ">", with: "&gt;")
-
-        let html = """
-        <!doctype html>
-        <html>
-        <head>
-          <meta charset=\"utf-8\">
-          <style>
-            body {
-              margin: 0;
-              height: 100vh;
-              display: grid;
-              place-items: center;
-              font: -apple-system-body;
-              color: #1d1d1f;
-              background: #f5f5f7;
-            }
-            main {
-              text-align: center;
-              max-width: 420px;
-              padding: 32px;
-            }
-            .icon {
-              width: 84px;
-              height: 108px;
-              margin: 0 auto 20px;
-              border-radius: 12px;
-              background: linear-gradient(#ffffff, #e8e8ed);
-              border: 1px solid #d2d2d7;
-              box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            }
-            h1 {
-              margin: 0 0 8px;
-              font-size: 18px;
-              font-weight: 600;
-            }
-            p {
-              margin: 0;
-              color: #6e6e73;
-              font-size: 13px;
-            }
-          </style>
-        </head>
-        <body>
-          <main>
-            <div class=\"icon\" aria-hidden=\"true\"></div>
-            <h1>\(escapedFileName)</h1>
-            <p>\(Self.fallbackMessage(for: fallback.reason))</p>
-          </main>
-        </body>
-        </html>
-        """
-
-        return Data(html.utf8)
-    }
 }

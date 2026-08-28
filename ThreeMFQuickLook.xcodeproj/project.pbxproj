@@ -8,7 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		016EC77BC0BEAA97C79DB10A /* ThreeMFKit in Frameworks */ = {isa = PBXBuildFile; productRef = 812EE5F3B8524578EA194D18 /* ThreeMFKit */; };
+		101E49C256F83BFDA98A6271 /* PreviewMarkup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632431FAA7AFF1FD998FC33E /* PreviewMarkup.swift */; };
 		264F56B65F0A9E0137E754F5 /* PreviewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0038FB3893DD140FBE2327F /* PreviewProvider.swift */; };
+		2A35ACC9B81DC084442F6DAC /* PreviewMarkupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11E5CDF06850D3B74B916AF /* PreviewMarkupTests.swift */; };
+		55797118CD58387C2F5D0DF1 /* PreviewMarkup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632431FAA7AFF1FD998FC33E /* PreviewMarkup.swift */; };
 		56D4A1520E74C21F6611A465 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF795E3E429EDC846ED8982C /* Assets.xcassets */; };
 		7AC7AA790DD393407BDEF477 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FCB9492A3670974F79E603 /* ContentView.swift */; };
 		C3FB9EC172327F1AA99B9A8C /* ThumbnailProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86A14A65D131F576559C4BA /* ThumbnailProvider.swift */; };
@@ -33,6 +36,13 @@
 			remoteGlobalIDString = 340269FF326B8B43FEF4BD3E;
 			remoteInfo = ThreeMFPreviewExtension;
 		};
+		F2C66BECE43EE3948F08FD5B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B7CB72BEFB8AAEA79F928D57 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 342371DC68EF0FCFD1D58B5F;
+			remoteInfo = ThreeMFQuickLook;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -51,8 +61,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0898E53407029E232BBFE574 /* ThreeMFQuickLookTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ThreeMFQuickLookTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18BE873B27FF16F763199C75 /* ThreeMFQuickLookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeMFQuickLookApp.swift; sourceTree = "<group>"; };
 		57B0EB762EA156CDE25E7461 /* ThreeMFQuickLook.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ThreeMFQuickLook.entitlements; sourceTree = "<group>"; };
+		632431FAA7AFF1FD998FC33E /* PreviewMarkup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewMarkup.swift; sourceTree = "<group>"; };
 		70A7DE04FBF454411980A98A /* ThreeMFPreviewExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ThreeMFPreviewExtension.entitlements; sourceTree = "<group>"; };
 		71098E7ADF97D26242FC818C /* ThreeMFQuickLook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThreeMFQuickLook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		832D25AD36FDD5AF1FE35D40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -61,6 +73,7 @@
 		BA7F0FF2DD6EFC53DE163D30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		BA91647CCAFCB6074F26D9BD /* ThreeMFThumbnailExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ThreeMFThumbnailExtension.entitlements; sourceTree = "<group>"; };
 		DE5FD198F4E4B165A87F445A /* ThreeMFThumbnailExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ThreeMFThumbnailExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		E11E5CDF06850D3B74B916AF /* PreviewMarkupTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewMarkupTests.swift; sourceTree = "<group>"; };
 		E4B3F18C69B035351E2BA56C /* ThreeMFPreviewExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ThreeMFPreviewExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAE4634A68AB309C83874096 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		EF795E3E429EDC846ED8982C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -91,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				EAE4634A68AB309C83874096 /* Info.plist */,
+				632431FAA7AFF1FD998FC33E /* PreviewMarkup.swift */,
 				B0038FB3893DD140FBE2327F /* PreviewProvider.swift */,
 				70A7DE04FBF454411980A98A /* ThreeMFPreviewExtension.entitlements */,
 			);
@@ -103,6 +117,7 @@
 			children = (
 				E4B3F18C69B035351E2BA56C /* ThreeMFPreviewExtension.appex */,
 				71098E7ADF97D26242FC818C /* ThreeMFQuickLook.app */,
+				0898E53407029E232BBFE574 /* ThreeMFQuickLookTests.xctest */,
 				DE5FD198F4E4B165A87F445A /* ThreeMFThumbnailExtension.appex */,
 			);
 			name = Products;
@@ -126,6 +141,7 @@
 			children = (
 				0AB8B3B1887B87BF000E76F6 /* ThreeMFPreviewExtension */,
 				4624CEC85639F2A0698D3773 /* ThreeMFQuickLookApp */,
+				E485DB6917B6D4C6D94FF231 /* ThreeMFQuickLookTests */,
 				C83D5E109C547E002C75C35E /* ThreeMFThumbnailExtension */,
 				2F128B08C2525F9ED47BCC82 /* Products */,
 			);
@@ -140,6 +156,15 @@
 			);
 			name = ThreeMFThumbnailExtension;
 			path = Sources/ThreeMFThumbnailExtension;
+			sourceTree = "<group>";
+		};
+		E485DB6917B6D4C6D94FF231 /* ThreeMFQuickLookTests */ = {
+			isa = PBXGroup;
+			children = (
+				E11E5CDF06850D3B74B916AF /* PreviewMarkupTests.swift */,
+			);
+			name = ThreeMFQuickLookTests;
+			path = Tests/ThreeMFQuickLookTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -204,6 +229,24 @@
 			productReference = DE5FD198F4E4B165A87F445A /* ThreeMFThumbnailExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		EBACC7F451FB7B15A90328A8 /* ThreeMFQuickLookTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 831BDFC6414377E91B45B3D1 /* Build configuration list for PBXNativeTarget "ThreeMFQuickLookTests" */;
+			buildPhases = (
+				08EF49C48831F3E735A8A4DB /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E34B90DCECD0DDEDDA61D940 /* PBXTargetDependency */,
+			);
+			name = ThreeMFQuickLookTests;
+			packageProductDependencies = (
+			);
+			productName = ThreeMFQuickLookTests;
+			productReference = 0898E53407029E232BBFE574 /* ThreeMFQuickLookTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -235,6 +278,7 @@
 				342371DC68EF0FCFD1D58B5F /* ThreeMFQuickLook */,
 				340269FF326B8B43FEF4BD3E /* ThreeMFPreviewExtension */,
 				A8CFCD17A257DD7BBB03BBB9 /* ThreeMFThumbnailExtension */,
+				EBACC7F451FB7B15A90328A8 /* ThreeMFQuickLookTests */,
 			);
 		};
 /* End PBXProject section */
@@ -251,6 +295,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		08EF49C48831F3E735A8A4DB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55797118CD58387C2F5D0DF1 /* PreviewMarkup.swift in Sources */,
+				2A35ACC9B81DC084442F6DAC /* PreviewMarkupTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4357CD5A759D451511740C3B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -264,6 +317,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				101E49C256F83BFDA98A6271 /* PreviewMarkup.swift in Sources */,
 				264F56B65F0A9E0137E754F5 /* PreviewProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -289,9 +343,31 @@
 			target = 340269FF326B8B43FEF4BD3E /* ThreeMFPreviewExtension */;
 			targetProxy = D2F6F2FA0F16EB8DE8B79B83 /* PBXContainerItemProxy */;
 		};
+		E34B90DCECD0DDEDDA61D940 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 342371DC68EF0FCFD1D58B5F /* ThreeMFQuickLook */;
+			targetProxy = F2C66BECE43EE3948F08FD5B /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		04EA6342FBB506DE120CE43A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.printfilemanager.ThreeMFQuickLookTests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ThreeMFQuickLook.app/Contents/MacOS/ThreeMFQuickLook";
+			};
+			name = Debug;
+		};
 		2AC5FAA55117A5C84BB94C96 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -326,7 +402,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -340,7 +416,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 15.0;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -365,6 +441,23 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.printfilemanager.ThreeMFQuickLook.preview;
 				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		395620202DBEF07D4A4B3F09 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.printfilemanager.ThreeMFQuickLookTests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ThreeMFQuickLook.app/Contents/MacOS/ThreeMFQuickLook";
 			};
 			name = Release;
 		};
@@ -468,7 +561,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -488,7 +581,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 15.0;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -534,6 +627,15 @@
 			buildConfigurations = (
 				CD47AB45E19E2DD19EC4A113 /* Debug */,
 				34E36718634630E275275BC0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		831BDFC6414377E91B45B3D1 /* Build configuration list for PBXNativeTarget "ThreeMFQuickLookTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04EA6342FBB506DE120CE43A /* Debug */,
+				395620202DBEF07D4A4B3F09 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

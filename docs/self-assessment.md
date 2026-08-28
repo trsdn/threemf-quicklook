@@ -4,20 +4,16 @@ Against the [trsdn Repository Quality Standard](https://github.com/trsdn/.github
 2026-08-28. The machine-readable result is [`.github/conformance.yml`](../.github/conformance.yml);
 the badge in the README is rendered from it and cannot be edited independently.
 
-**Result: Needs work — 57 pass, 4 partial, 0 fail, 23 not applicable.**
+**Result: Healthy — 61 pass, 0 partial, 0 fail, 23 not applicable.**
 
-No criterion fails. The state is `Needs work` rather than `Healthy` because of X03: this app's
-entire output is images rendered into Finder, and their accessible description is Finder's, not
-ours. That is worth naming rather than burying.
+No criterion fails and no partial remains.
 
-## The four partials
+An earlier draft of this record marked X03 `partial` and claimed there was no way to give the
+preview a text alternative. That was wrong, and checking it rather than trusting it is what turned
+it into a fix: the preview extension does not have to return raw image bytes. `QLPreviewReply`
+takes HTML with `attachments` referenced as `cid:`, so the image can be wrapped in markup that
+carries a real `alt` description. It now is.
 
-| # | Requirement | Where it stands |
-|---|---|---|
-| X03 | Non-text content has a text alternative | The preview and thumbnail extensions return an image to Finder. What VoiceOver announces for it is Finder's, and `QLPreviewingController` offers no accessible-description hook for a returned image. The host app window is a single line of text and is readable. There is no known way to close this from here; it is recorded rather than claimed. |
-| S03 | Formatting, linting, type and static checks run automatically | Swift 6 language mode makes concurrency and sendability errors rather than warnings, and CI checks bundle shape, plist versions and badge drift. There is no SwiftLint or SwiftFormat configuration, so style is not enforced. |
-| P09 | Repository activity from a self-hosted, generated source | No statistics card is committed yet. No third-party image service is used in its place, which is the failure the criterion exists to prevent. |
-| G08 | Repository-scoped agent configuration is intentional | No `.github/github-app.yml`. The defaults are acceptable, but that is an assumption rather than a recorded decision. |
 
 ## What is not applicable, and why
 
@@ -41,11 +37,15 @@ ours. That is worth naming rather than burying.
 | B05 | A reproducible validation command | `xcodegen generate` then `xcodebuild … build`, plus `scripts/check-bundle.sh`; documented in README, CONTRIBUTING and AGENTS.md and run unchanged by CI. |
 | B07 | Dependencies and runtimes declared | `project.yml` declares Swift 6, macOS 15 and ThreeMFKit pinned by `exactVersion`. |
 | S01 | Setup reproducible from a clean checkout | Verified: the project was built from a fresh checkout against the published package, and the first attempt failed for a real reason — ThreeMFKit's `.unsafeFlags`, which SwiftPM forbids for a versioned dependency. Fixed at the source and released as 1.0.1. |
-| S02 | Tests cover important behaviour and failure paths | The parsing logic and its failure paths are tested in [ThreeMFKit](https://github.com/trsdn/ThreeMFKit), which has 18 tests including malformed and hostile input. This repository has no unit tests of its own: it is two thin extension entry points and a host app. What it has instead is `scripts/check-bundle.sh`, which is run by CI and was itself verified by deliberately introducing each failure. This is the weakest evidence in this record and is recorded as such. |
+| S02 | Tests cover important behaviour and failure paths | 12 tests over `PreviewMarkup`, which is the markup a preview returns: the text alternative, the `aria-hidden` decorative icon, dark mode, rounding, and escaping of an untrusted file name in both an element body and an attribute value. Verified to catch regressions by deliberately removing the quote escape, which failed two of them. Parsing and its failure paths are tested in [ThreeMFKit](https://github.com/trsdn/ThreeMFKit) (18 tests). `scripts/check-bundle.sh` covers bundle shape and was verified by breaking the bundle three ways. |
 | S04 | CI covers every supported runtime | macOS 15, universal arm64 + x86_64. The universal build is what ships and is what CI builds. |
 | S05 | Secret scanning | Enabled with push protection. |
 | S09 | Required checks protect the default branch | `main` requires `Build` and `Versions`; force pushes and deletions are off. |
 | S10 | Architecture and non-obvious constraints documented | README explains where the logic actually lives and why the extensions must decline plain ZIPs. AGENTS.md records the constraints that are invisible in the code: no embedded frameworks because preflight rejects symlinks, the exact-version pin because the bundle is notarized, and that `qlmanage -t` proves nothing. |
+| P09 | Repository activity from a self-hosted, generated source | `.github/stats/repo-card.svg` is generated by the standard's generator and committed, so no third-party host renders it. `stats.yml` refreshes it weekly by opening a pull request rather than pushing, which keeps branch protection intact without a bypass token. |
+| S03 | Formatting, linting, type and static checks run automatically | SwiftLint in CI, sharing thresholds with the repository this was split from so the two stay comparable. Swift 6 language mode makes concurrency and sendability errors rather than warnings, and CI also checks bundle shape, plist versions and badge drift. |
+| X03 | Non-text content has a text alternative | The preview wraps the extracted image in HTML with an `alt` naming the file and its pixel dimensions, rather than returning bare image bytes with nothing to announce. The decorative icon on the no-preview card is `aria-hidden`; the file name and reason are real text. A thumbnail handed to Finder is still a bare image, but Finder labels it from the file. |
+| G08 | Repository-scoped agent configuration is intentional | `.github/github-app.yml` records where the logic actually lives, the exact-version pin, and two traps that cost real time here: `qlmanage -t` proving nothing, and installing an ad-hoc build breaking extension registration until a logout. |
 | D01 | Install, prerequisites and command documented | README documents the install, the mandatory single launch that registers the extensions, and the registry refresh. |
 | D03 | Health verification and rollback documented | `scripts/verify-quicklook.swift` asks macOS for a thumbnail through the API Finder uses and reports the size and duration. Rollback is installing an earlier signed release; the app holds no state to migrate. |
 | D05 | Verification after deploy | Verified for v1.0.0 against a real library: both extensions registered and enabled at 1.0.0, five real `.3mf` files rendered in 28–434 ms. |
