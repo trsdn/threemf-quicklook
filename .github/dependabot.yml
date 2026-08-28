@@ -1,0 +1,12 @@
+# S08: dependency updates have an owner and a process.
+#
+# The dependency surface is one Swift package (ThreeMFKit, which is pinned to an exact version
+# because this bundle is notarized) plus the GitHub Actions used by CI and releases.
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    reviewers: ["trsdn"]

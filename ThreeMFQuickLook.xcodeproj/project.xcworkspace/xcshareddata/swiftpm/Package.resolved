@@ -1,6 +1,15 @@
 {
-  "originHash" : "b26c070fd1f0b029780331f3cefa3909a6d58ea6b3ae242bffe49d6011fe06fe",
+  "originHash" : "de0e8e285d9e7cd79c236cf766650053556550045242e6d007deb092a0366d19",
   "pins" : [
+    {
+      "identity" : "threemfkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/trsdn/ThreeMFKit.git",
+      "state" : {
+        "revision" : "1c3756fcc64f00e8a7ec927156908934ddbdc541",
+        "version" : "1.0.1"
+      }
+    },
     {
       "identity" : "zipfoundation",
       "kind" : "remoteSourceControl",

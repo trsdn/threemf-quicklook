@@ -10,13 +10,15 @@ settings:
     ENABLE_USER_SCRIPT_SANDBOXING: "YES"
     # Single source for the version, mirroring printfilemanager/project.yml. Both projects ship
     # in one release, so scripts/check-versions.sh enforces that these two values stay equal.
-    MARKETING_VERSION: "0.2.0"
-    CURRENT_PROJECT_VERSION: "6"
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
 packages:
-  # Shared 3MF parsing and preview extraction, also consumed by the app project.
-  # Its own tests live in the package and run with `swift test`.
+  # 3MF parsing and preview extraction. Lives in its own repository because it is independent of
+  # this app and is also consumed by printfilemanager, and SwiftPM cannot depend on a subdirectory.
+  # Pinned by exact version: this bundle is notarized, so its inputs must be reproducible.
   ThreeMFKit:
-    path: ../ThreeMFKit
+    url: https://github.com/trsdn/ThreeMFKit.git
+    exactVersion: 1.0.1
 targets:
   ThreeMFQuickLook:
     type: application

@@ -1,0 +1,60 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  versions:
+    name: Versions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      # A literal version in an Info.plist silently overrides MARKETING_VERSION, and the
+      # notarization broker rejects a bundle whose version does not equal the tag -- at signing
+      # time, long after CI is green. This moves that failure forward.
+      - name: Check Info.plist versions
+        run: ./scripts/check_plist_versions.py
+
+      - name: Check README badges
+        run: ./scripts/badges.py --check
+
+  build:
+    name: Build
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
+      - name: Install tools
+        run: brew install xcodegen
+
+      - name: Generate project
+        run: |
+          xcodegen generate
+          # The .xcodeproj is committed as well as generated, so a stale one would mean CI and a
+          # local build disagree about what is being built.
+          git diff --exit-code -- ThreeMFQuickLook.xcodeproj
+
+      - name: Build
+        run: |
+          xcodebuild -project ThreeMFQuickLook.xcodeproj \
+                     -scheme ThreeMFQuickLook \
+                     -destination 'platform=macOS' \
+                     CODE_SIGNING_ALLOWED=NO build
+
+      - name: Check bundle is notarization-ready
+        run: ./scripts/check-bundle.sh

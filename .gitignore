@@ -1,2 +1,6 @@
+.DS_Store
 build/
-.local-fixtures/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+.release/
