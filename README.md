@@ -50,6 +50,25 @@ swift scripts/verify-quicklook.swift ~/Downloads/some-model.3mf
 # OK: 512x512
 ```
 
+### If previews stop working entirely
+
+If both extensions show as registered but nothing renders, the extension is usually not being
+launched at all — check with:
+
+```bash
+swift scripts/verify-quicklook.swift some-model.3mf   # fails
+pgrep -fl ThreeMFThumbnailExtension                   # nothing, even during the request
+```
+
+That state is most often caused by installing an **ad-hoc signed** build over a notarized one:
+macOS refuses to register extensions from it, and the damaged registration survives reinstalling
+the notarized build, `lsregister -f`, and `qlmanage -r`. Log out and back in, or restart. Then
+reinstall and launch the app once.
+
+The lesson is cheaper than the recovery: do not install a locally-signed build over the notarized
+one to test a change. Test the code with `xcodebuild … test` and go through a real notarized
+release for anything that has to be verified in Finder.
+
 ### A note on `qlmanage`
 
 `qlmanage -t` **does not work with modern Quick Look extensions** and hangs indefinitely. It
