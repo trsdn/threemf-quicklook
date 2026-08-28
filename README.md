@@ -110,6 +110,12 @@ This repository is assessed against the
 [trsdn Repository Quality Standard](https://github.com/trsdn/.github); the evidence is in
 [docs/self-assessment.md](docs/self-assessment.md).
 
+## Documentation
+
+- [`docs/prd-3mf-quick-look-preview.md`](docs/prd-3mf-quick-look-preview.md) — the original product
+  requirements, moved here with the code
+- [`CHANGELOG.md`](CHANGELOG.md) — user-facing and operational changes
+
 ## Related
 
 - [ThreeMFKit](https://github.com/trsdn/ThreeMFKit) — the 3MF reading and preview extraction package
